@@ -14,5 +14,11 @@
     <ItemGroup>
       <ProjectReference Include="..\ProductInfo.Version.Manager.Services\ProductInfo.Version.Manager.Services.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <None Update="..\ProductInfo.cs">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
 </Project>
