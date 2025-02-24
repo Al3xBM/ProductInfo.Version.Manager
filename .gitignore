@@ -1,0 +1,67 @@
+# Build Folders
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.app
+
+# Visual Studio Code
+.vscode/
+
+# User-Specific Files
+*.user
+*.suo
+*.csproj.user
+
+# NuGet Packages
+*.nupkg
+packages/
+!packages/repositories.config
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Logs & Temp Files
+logs/
+*.log
+*.tlog
+*.cache
+*.tmp
+*.temp
+*.bak
+
+# .NET Core & .NET 8 Artifacts
+project.lock.json
+project.assets.json
+global.json
+*.deps.json
+*.runtimeconfig.json
+
+# Entity Framework Migrations
+Migrations/
+
+# ASP.NET Environment
+appsettings.*.json
+secrets.json
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Docker
+docker-compose.override.yml
+**/docker-compose.*.yml
+**/docker-compose.override.*.yml
+.dockerignore
+
+# Node.js (for Blazor or frontend integrations)
+node_modules/
+*.tsbuildinfo
+
+# Resharper
+*.DotSettings.user
+_ReSharper.Caches/
