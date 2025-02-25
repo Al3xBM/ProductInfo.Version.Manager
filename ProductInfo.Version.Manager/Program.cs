@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.IO.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProductInfo.Version.Manager.Config;
 using ProductInfo.Version.Manager.Handlers;
@@ -13,6 +14,7 @@ var host = Host.CreateDefaultBuilder()
         services.AddSingleton<IVersionManagerService, VersionManagerService>();
         services.AddSingleton<IProductInfoIo, ProductInfoFileIo>();
         services.AddSingleton(ProductInfoFileConfigProvider.GetConfig());
+        services.AddSingleton<IFileSystem, FileSystem>();
     })
     .Build();
     

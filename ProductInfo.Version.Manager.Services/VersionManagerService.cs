@@ -5,8 +5,10 @@ namespace ProductInfo.Version.Manager.Services;
 
 public class VersionManagerService : IVersionManagerService
 {
-    private const string UpdatingVersionNumberForRelease = "Updating version number for {ReleaseType} release";
-    private const string UpdatedProductInfoVersion = "Updated ProductInfo version is : {UpdatedVersion};";
+    public const string UpdatingVersionNumberForRelease = "Updating version number for {0} release";
+    public const string UpdatedProductInfoVersion = "Updated ProductInfo version is : {0};";
+    public const string CurrentProductInfoVersion = "Current ProductInfo version is: '{0}'";
+
     private readonly ILogger<VersionManagerService> _logger;
     private readonly IProductInfoIo _productInfoIo;
 
@@ -21,7 +23,7 @@ public class VersionManagerService : IVersionManagerService
     {
         var currentVersion = await _productInfoIo.ReadProductInfoAsync();
         
-        _logger.LogInformation("Current ProductInfo version is : '{CurrentVersion}'", currentVersion);
+        _logger.LogInformation(CurrentProductInfoVersion, currentVersion);
     }
 
     public async Task<string> UpdateVersionForFeatureRelease()

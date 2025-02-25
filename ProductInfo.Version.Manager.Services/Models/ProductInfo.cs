@@ -2,8 +2,18 @@
 
 public class ProductInfo
 {
-    public int MajorVersion { get; set; }
+    private int _majorVersion;
     
+    public int MajorVersion
+    {
+        get => _majorVersion;
+        set
+        {
+            _majorVersion = value;
+            MinorVersion = 0;
+        }
+    }
+
     public int MinorVersion { get; set; }
 
     public string OuterVersion { get; private set; } = null!;
