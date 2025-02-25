@@ -14,11 +14,9 @@
     <ItemGroup>
       <ProjectReference Include="..\ProductInfo.Version.Manager.Services\ProductInfo.Version.Manager.Services.csproj" />
     </ItemGroup>
-    
-    <ItemGroup>
-        <None Update="..\ProductInfo.cs">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
+
+    <Target Name="CopyFiles" AfterTargets="Build">
+        <Copy SourceFiles="../ProductInfo.cs" DestinationFolder="$(OutDir)" />
+    </Target>
 
 </Project>

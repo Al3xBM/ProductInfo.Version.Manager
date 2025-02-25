@@ -7,7 +7,7 @@ public class ProductInfoFileIo : IProductInfoIo
 {
     private readonly ILogger<ProductInfoFileIo> _logger;
     private readonly ProductInfoFileConfig _config;
-    private Models.ProductInfo _productInfo;
+    private Models.ProductInfo? _productInfo;
 
     public ProductInfoFileIo(ILogger<ProductInfoFileIo> logger, ProductInfoFileConfig config)
     {

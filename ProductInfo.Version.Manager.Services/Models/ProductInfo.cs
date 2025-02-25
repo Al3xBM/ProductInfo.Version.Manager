@@ -5,15 +5,15 @@ public class ProductInfo
     public int MajorVersion { get; set; }
     
     public int MinorVersion { get; set; }
-    
-    public string OuterVersion { get; private set; }
-    
-    public IEnumerable<string> AdditionalInfo { get; set; }
+
+    public string OuterVersion { get; private set; } = null!;
+
+    public IEnumerable<string> AdditionalInfo { get; set; } = null!;
 
     public string FullVersion
     {
         get => $"{OuterVersion}.{MajorVersion}.{MinorVersion}";
-        set
+        init
         {
             var versionParts = value.Split('.');
             if (versionParts.Length != 4)

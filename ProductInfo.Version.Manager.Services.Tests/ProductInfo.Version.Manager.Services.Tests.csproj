@@ -20,4 +20,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ProductInfo.Version.Manager.Services\ProductInfo.Version.Manager.Services.csproj" />
+    </ItemGroup>
+
 </Project>
