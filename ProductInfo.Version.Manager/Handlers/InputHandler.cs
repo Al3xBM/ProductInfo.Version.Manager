@@ -1,20 +1,30 @@
 ﻿using System.Globalization;
+using System.IO.Abstractions;
 using Microsoft.Extensions.Logging;
 using ProductInfo.Version.Manager.Config;
 using ProductInfo.Version.Manager.Services;
 using ProductInfo.Version.Manager.Services.IO.File;
+using static ProductInfo.Version.Manager.Common.Constants;
 
 namespace ProductInfo.Version.Manager.Handlers;
 
 public class InputHandler : IInputHandler
 {
+    public const string FileNotFound = "File not found under specified path: '{0}'";
+    public const string InvalidReleaseTypeValue = "Provided value is not a valid release type: '{0}'";
+    public const string UnexpectedArgumentsFormat = $"Expected arguments format is \"{PathFlag} %path% {ReleaseTypeFlag} %releaseType%\"";
+    public const string ProvidePath = "Please provide a ProductInfo file path:";
+    public const string Exiting = "Exiting...";
+    
     private readonly ILogger<InputHandler> _logger;
     private readonly IVersionManagerService _versionManagerService;
+    private readonly IFileSystem _fileSystem;
     
-    public InputHandler(ILogger<InputHandler> logger, IVersionManagerService versionManager)
+    public InputHandler(ILogger<InputHandler> logger, IVersionManagerService versionManager, IFileSystem fileSystem)
     {
         _logger = logger;
         _versionManagerService = versionManager;
+        _fileSystem = fileSystem;
     }
     
     public async Task RunAsync(string[] args)
@@ -56,13 +66,13 @@ public class InputHandler : IInputHandler
 
             switch (input.Trim().ToLower(CultureInfo.InvariantCulture))
             {
-                case "exit":
-                    _logger.LogInformation("Exiting...");
+                case Exit:
+                    _logger.LogInformation(Exiting);
                     return;
-                case "bugfix":
+                case Bugfix:
                     await _versionManagerService.UpdateVersionForBugfixRelease();
                     break;
-                case "feature":
+                case Feature:
                     await _versionManagerService.UpdateVersionForFeatureRelease();
                     break;
             }
@@ -73,10 +83,10 @@ public class InputHandler : IInputHandler
     {
         while (true)
         {
-            _logger.LogInformation("Please provide a ProductInfo file path:");
+            _logger.LogInformation(ProvidePath);
             var input = Console.ReadLine()?.Trim();
 
-            if (File.Exists(input))
+            if (_fileSystem.File.Exists(input))
             {
                 ProductInfoFileConfigProvider.SwapInstance(new ProductInfoFileConfig(input));
                 return;
@@ -88,10 +98,10 @@ public class InputHandler : IInputHandler
     
     private void ProcessFilePathArgs(List<string> argsList)
     {
-        var path = ExtractValueFromArgs(argsList, "--path");
-        if (!File.Exists(path))
+        var path = ExtractValueFromArgs(argsList, PathFlag);
+        if (!_fileSystem.File.Exists(path))
         {
-            _logger.LogError("File not found under specified path: '{Path}'", path);
+            _logger.LogError(FileNotFound, path);
             throw new ArgumentException();
         }
             
@@ -100,15 +110,15 @@ public class InputHandler : IInputHandler
 
     private async Task ProcessReleaseTypeArgs(List<string> argsList)
     {
-        var releaseType = ExtractValueFromArgs(argsList, "--releaseType");
-        var releaseTypes = new List<string> {"bugfix", "feature"};
+        var releaseType = ExtractValueFromArgs(argsList, ReleaseTypeFlag);
+        var releaseTypes = new List<string> {Bugfix, Feature};
         if (!releaseTypes.Contains(releaseType))
         {
-            _logger.LogError("Provided value is not a valid release type: '{ReleaseType}'", releaseType);
+            _logger.LogError(InvalidReleaseTypeValue, releaseType);
             throw new ArgumentException();
         }
 
-        if (releaseType == "bugfix")
+        if (releaseType == Bugfix)
         {
             await _versionManagerService.UpdateVersionForBugfixRelease();
         }
@@ -128,7 +138,7 @@ public class InputHandler : IInputHandler
             return value;
         }
 
-        _logger.LogError("Expected arguments format is \"--path %path% --releaseType %releaseType%\"");
+        _logger.LogError(UnexpectedArgumentsFormat);
         throw new ArgumentException();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging.Abstractions;
 using ProductInfo.Version.Manager.Services.IO.File;
+using static ProductInfo.Version.Manager.Services.Tests.Common.Constants;
 
 namespace ProductInfo.Version.Manager.Services.Tests.VersionManagerServiceTests;
 
@@ -26,13 +27,9 @@ public class UpdateVersionForBugfixRelease : VersionManagerServiceTestBase
     [Fact]
     public async Task ReturnBugfixIncrementedDefaultVersion_When_FilePathNotSpecified()
     {
-        var productInfoFileIo = new ProductInfoFileIo(
-            NullLogger<ProductInfoFileIo>.Instance, 
-            new ProductInfoFileConfig("dummy"), 
-            FileSystem);
-        var service = new VersionManagerService(Logger, productInfoFileIo);
+        FileSystem.RemoveFile(DefaultPath);
         
-        var result = await service.UpdateVersionForBugfixRelease();
+        var result = await _act();
         
         result.Should().Be(BugfixIncrementedDefaultVersion);
     }

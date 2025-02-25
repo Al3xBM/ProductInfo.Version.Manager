@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		ProductInfo.cs = ProductInfo.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInfo.Version.Manager.Tests", "ProductInfo.Version.Manager.Tests\ProductInfo.Version.Manager.Tests.csproj", "{0AC3350C-90B2-4BBC-8C3D-1F329C45C9D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,8 +33,13 @@ Global
 		{FB98A957-8B40-425D-99B3-73D187FDFB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB98A957-8B40-425D-99B3-73D187FDFB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB98A957-8B40-425D-99B3-73D187FDFB50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC3350C-90B2-4BBC-8C3D-1F329C45C9D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC3350C-90B2-4BBC-8C3D-1F329C45C9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC3350C-90B2-4BBC-8C3D-1F329C45C9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC3350C-90B2-4BBC-8C3D-1F329C45C9D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FB98A957-8B40-425D-99B3-73D187FDFB50} = {B242B62F-6573-42BF-AD3F-4171A5B9CCD6}
+		{0AC3350C-90B2-4BBC-8C3D-1F329C45C9D2} = {B242B62F-6573-42BF-AD3F-4171A5B9CCD6}
 	EndGlobalSection
 EndGlobal

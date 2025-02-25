@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
 using ProductInfo.Version.Manager.Services.IO.File;
+using static ProductInfo.Version.Manager.Services.Tests.Common.Constants;
 
 namespace ProductInfo.Version.Manager.Services.Tests.VersionManagerServiceTests;
 
@@ -27,13 +28,9 @@ public class CheckCurrentVersionShould : VersionManagerServiceTestBase
     [Fact]
     public async Task LogDefaultVersion_When_FilePathNotSet()
     {
-        var productInfoFileIo = new ProductInfoFileIo(
-            NullLogger<ProductInfoFileIo>.Instance, 
-            new ProductInfoFileConfig("dummy"), 
-            FileSystem);
-        var service = new VersionManagerService(Logger, productInfoFileIo);
+        FileSystem.RemoveFile(DefaultPath);
         
-        await service.CheckCurrentVersion();
+        await _act();
         
         CheckLogCall(
             string.Format(VersionManagerService.CurrentProductInfoVersion, DefaultVersion), 
