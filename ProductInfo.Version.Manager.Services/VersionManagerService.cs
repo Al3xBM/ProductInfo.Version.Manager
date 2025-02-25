@@ -6,6 +6,7 @@ namespace ProductInfo.Version.Manager.Services;
 public class VersionManagerService : IVersionManagerService
 {
     private const string UpdatingVersionNumberForRelease = "Updating version number for {ReleaseType} release";
+    private const string UpdatedProductInfoVersion = "\"Updated ProductInfo version is : {UpdatedVersion};";
     private readonly ILogger<VersionManagerService> _logger;
     private readonly IProductInfoIo _productInfoIo;
 
@@ -23,27 +24,30 @@ public class VersionManagerService : IVersionManagerService
         _logger.LogInformation("Current ProductInfo version is : {CurrentVersion}", currentVersion);
     }
 
-    public async Task UpdateVersionForFeatureRelease()
+    public async Task<string> UpdateVersionForFeatureRelease()
     {
         _logger.LogInformation(UpdatingVersionNumberForRelease, "feature");
         
-        await Task.CompletedTask;
+        var updatedVersion = await _productInfoIo.UpdateProductInfoAsync(true);
+        
+        LogUpdatedProductVersion(updatedVersion);
+        
+        return updatedVersion;
     }
 
-    public async Task UpdateVersionForBugfixRelease()
+    public async Task<string> UpdateVersionForBugfixRelease()
     {
         _logger.LogInformation(UpdatingVersionNumberForRelease, "bugfix");
         
-        await Task.CompletedTask;
-    }
+        var updatedVersion = await _productInfoIo.UpdateProductInfoAsync();
 
-    private async Task UpdateMajorVersionNumber()
-    {
-        UpdateMinorVersionNumber(0);
-    }
-
-    private async Task UpdateMinorVersionNumber(int? version = null)
-    {
+        LogUpdatedProductVersion(updatedVersion);
         
+        return updatedVersion;
+    }
+
+    private void LogUpdatedProductVersion(string updatedVersion)
+    {
+        _logger.LogInformation(UpdatedProductInfoVersion, updatedVersion);
     }
 }

@@ -4,7 +4,7 @@ public interface IVersionManagerService
 {
     Task CheckCurrentVersion();
     
-    Task UpdateVersionForFeatureRelease();
+    Task<string> UpdateVersionForFeatureRelease();
 
-    Task UpdateVersionForBugfixRelease();
+    Task<string> UpdateVersionForBugfixRelease();
 }

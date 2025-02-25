@@ -17,6 +17,7 @@ public class InputHandler : IInputHandler
     
     public async Task RunAsync(string[] args)
     {
+        // TODO : actual processing for input args
         if (args.Length == 0)
         {
             _logger.LogInformation("No arguments provided, using default ProductInfo file path.");
