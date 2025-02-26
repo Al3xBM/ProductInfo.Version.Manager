@@ -11,6 +11,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3AA1D266-053F-4CB8-853C-035B8A6B3E62}"
 	ProjectSection(SolutionItems) = preProject
 		ProductInfo.cs = ProductInfo.cs
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInfo.Version.Manager.Tests", "ProductInfo.Version.Manager.Tests\ProductInfo.Version.Manager.Tests.csproj", "{0AC3350C-90B2-4BBC-8C3D-1F329C45C9D2}"

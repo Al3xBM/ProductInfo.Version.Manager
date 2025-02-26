@@ -26,7 +26,7 @@ public class RunAsyncShould : InputHandlerTestBase
         _act = Service.RunAsync;
     }
 
-    [Theory(Skip = "Skipping this for now")]
+    [Theory(Skip = "Skipping this for now. A wrapper should be used for Environment.Exit(0) call, so that it can be mocked inside UnitTests.")]
     [InlineData(Feature)]
     [InlineData(Bugfix)]
     public async Task ProcessInputArgs_When_Present(string releaseType)
